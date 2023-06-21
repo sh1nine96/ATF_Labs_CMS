@@ -1,0 +1,9 @@
+package com.gl.clientmanagement.service;
+
+import com.gl.clientmanagement.model.Employee;
+
+public interface EmployeeUpdateService {
+
+	String updateExistingEmployee(Employee employee);
+
+}

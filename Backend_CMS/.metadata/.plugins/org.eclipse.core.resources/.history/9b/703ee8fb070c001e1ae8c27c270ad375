@@ -1,0 +1,21 @@
+package com.gl.clientmanagement.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gl.clientmanagement.repository.EmployeeRepository;
+import com.gl.clientmanagement.service.ClientDeleteService;
+
+@Service
+public class ClientDeleteServiceImpl implements ClientDeleteService {
+
+	@Autowired
+	EmployeeRepository employeeRepository;
+
+	@Override
+	public String deleteEmployeeById(Integer id) {
+		employeeRepository.deleteById(id);
+		return "Employee with id: " + id + " is deleted";
+	}
+
+}

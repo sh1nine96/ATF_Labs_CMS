@@ -1,0 +1,7 @@
+package com.gl.clientmanagement.service;
+
+public interface EmployeeDeleteService {
+
+	String deleteEmployeeById(Integer id);
+
+}

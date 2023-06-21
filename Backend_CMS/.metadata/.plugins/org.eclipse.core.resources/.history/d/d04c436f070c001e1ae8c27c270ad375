@@ -1,0 +1,23 @@
+package com.gl.clientmanagement.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gl.clientmanagement.model.Employee;
+import com.gl.clientmanagement.service.EmployeeUpdateService;
+
+@RestController
+@RequestMapping("/updateService")
+public class EmployeeUpdateController {
+
+	@Autowired
+	EmployeeUpdateService updateService;
+
+	@PutMapping("/updateExistingEmployeeRecord")
+	public String updateExistingEmployeeRecord(@RequestBody Employee employee) {
+		return updateService.updateExistingEmployee(employee);
+	}
+}
