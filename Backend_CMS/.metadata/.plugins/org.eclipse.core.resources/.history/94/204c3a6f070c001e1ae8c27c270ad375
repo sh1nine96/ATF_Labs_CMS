@@ -1,0 +1,11 @@
+package com.gl.clientmanagement.service;
+
+import java.util.List;
+
+import com.gl.clientmanagement.model.Employee;
+
+public interface EmployeeCreateService {
+
+	String saveAllEmployees(List<Employee> employees);
+
+}

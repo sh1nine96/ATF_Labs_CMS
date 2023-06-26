@@ -1,0 +1,26 @@
+package com.gl.clientmanagement.serviceimpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.gl.clientmanagement.model.Client;
+import com.gl.clientmanagement.repository.EmployeeRepository;
+import com.gl.clientmanagement.service.EmployeeUpdateService;
+
+@Service
+public class EmployeeUpdateServiceImpl implements EmployeeUpdateService {
+
+	@Autowired
+	EmployeeRepository employeeRepository;
+
+	@Override
+	public String updateExistingEmployee(Client client) {
+		boolean exists = employeeRepository.existsById(client.getId());
+		if (exists) {
+			employeeRepository.saveAndFlush(client);
+			return "Employee record updated";
+		} else
+			throw new RuntimeException("The id: " + client.getId() + " you're trying to update is not present");
+	}
+
+}

@@ -1,0 +1,20 @@
+package com.gl.clientmanagement.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Sort.Direction;
+
+import com.gl.clientmanagement.model.Client;
+
+public interface ClientReadService {
+
+	List<Client> listAllEmployees();
+
+	Optional<Client> fetchEmployeeById(Integer id);
+
+	List<Client> getEmployeesSortedByfirstName(Direction direction);
+
+	List<Client> fetchEmployeesByFirstName(String firstName);
+
+}

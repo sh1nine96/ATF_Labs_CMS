@@ -1,0 +1,79 @@
+package com.gl.clientmanagement.serviceimpl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
+
+import com.gl.clientmanagement.model.Client;
+import com.gl.clientmanagement.repository.ClientRepository;
+import com.gl.clientmanagement.service.ClientReadService;
+
+@Service
+public class ClientReadServiceImpl implements ClientReadService {
+
+	@Autowired
+	ClientRepository clientRepository;
+
+	@Override
+	public List<Client> listAllClients() {
+		return clientRepository.findAll();
+	}
+
+	@Override
+	public Optional<Client> fetchClientById(Integer id) {
+		return clientRepository.findById(id);
+	}
+
+	@Override
+	public List<Client> getCleintsSortedByfirstName(Direction direction) {
+		return clientRepository.findAll(Sort.by(direction, "firstName"));
+	}
+
+	@Override
+	public List<Client> fetchClientsByFirstName(String firstName) {
+		Client clientByFirstName = new Client();
+		clientByFirstName.setFirstName(firstName);
+		ExampleMatcher exampleMatcher = ExampleMatcher.matching()
+				.withMatcher("firstName", ExampleMatcher.GenericPropertyMatchers.exact())
+				.withIgnorePaths("id", "lastName", "email");
+		Example<Client> example = Example.of(clientByFirstName, exampleMatcher);
+		return clientRepository.findAll(example);
+	}
+
+	@Override
+	public List<Client> listAllEmployees() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Client> fetchEmployeeById(Integer id) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public List<Client> getEmployeesSortedByfirstName(Direction direction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> fetchEmployeesByFirstName(String firstName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Client> getClientsSortedByfirstName(Direction direction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
