@@ -5,6 +5,6 @@ import com.gl.clientmanagement.model.Invoice;
 
 public interface InvoiceUpdateService {
 
-    String updateExistingInvoice(Invoice invoice);
+    String updateExistingInvoice(long id, Invoice invoice);
 
 }

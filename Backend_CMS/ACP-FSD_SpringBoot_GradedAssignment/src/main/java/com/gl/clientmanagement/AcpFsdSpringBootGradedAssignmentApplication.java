@@ -1,16 +1,14 @@
 package com.gl.clientmanagement;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import org.springframework.context.annotation.ComponentScan;
+
 
 @SpringBootApplication
+@ComponentScan("com.gl.clientmanagement")
 @OpenAPIDefinition
 public class AcpFsdSpringBootGradedAssignmentApplication implements CommandLineRunner {
 

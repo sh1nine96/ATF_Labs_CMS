@@ -1,18 +1,18 @@
 package com.gl.clientmanagement.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "CLIENT")
 public class Client {
 
 	@Id
@@ -33,11 +33,14 @@ public class Client {
 	private String gstNumber;
 	@Column(length = 50, name = "email")
 	private String email;
-	// phone should be of string only
+	//phone should be of string only
 	@Column(length = 20, name = "phone")
 	private String phone;
 	// be default is column ki value 0 hogi
 	@Column (name = "isDeleted", nullable = false, columnDefinition = "int default 0")
 	private boolean isDeleted;
+
+//	@OneToMany(mappedBy = "clientId")
+//	private List<Invoice> invoices;
 
 }

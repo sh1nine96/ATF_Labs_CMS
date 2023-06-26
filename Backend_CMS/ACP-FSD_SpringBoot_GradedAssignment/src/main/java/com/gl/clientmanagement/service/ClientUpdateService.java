@@ -4,6 +4,6 @@ import com.gl.clientmanagement.model.Client;
 
 public interface ClientUpdateService {
 
-	String updateExistingEmployee(Client client);
+	String updateExistingClient(int clientId, Client client);
 
 }
