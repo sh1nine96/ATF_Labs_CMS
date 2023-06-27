@@ -1,28 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import ClientService from "../services/ClientService";
 import "../css/ClientDetailsComponent.css";
+import { useNavigate } from "react-router-dom";
 
 const ClientDetailsComponent = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const id = new URLSearchParams(location.search).get("id");
-  const [client, setClient] = useState(null);
+  const clientId = new URLSearchParams(location.search).get("id");
+  const [client, setClient] = useState({
+    pathname: "/ClientManagement/createService/addNewInvoices/",
+    state: { clientId: null },
+  });
 
   useEffect(() => {
-    if (id) {
-      ClientService.getClientById(id)
+    if (clientId && !client.state.clientId) {
+      ClientService.getClientById(clientId)
         .then((response) => {
-          setClient(response.data);
+          console.log(response.data);
+          setClient({ ...client, state: { clientId: response.data } });
+          console.log(client);
         })
         .catch((error) => {
           console.error("Error fetching client details:", error);
         });
     }
-  }, [id]);
+  }, [clientId, client]);
 
-  if (!client) {
+  useEffect(() => {
+    console.log("Hello", client);
+  }, [client]);
+
+  if (!client.state.clientId) {
     return <div>Loading....</div>;
   }
+
+  const clientInfo = client.state.clientId;
 
   return (
     <div className="client-details-container">
@@ -31,56 +44,57 @@ const ClientDetailsComponent = () => {
         <tbody>
           <tr>
             <td>Client Name:</td>
-            <td>{client.name}</td>
+            <td>{clientInfo.name}</td>
           </tr>
           <tr>
             <td>Main Contact Person:</td>
-            <td> {client.mainContactPerson}</td>
+            <td> {clientInfo.mainContactPerson}</td>
           </tr>
           <tr>
             <td>Address: </td>
-            <td> {client.address}</td>
+            <td> {clientInfo.address}</td>
           </tr>
           <tr>
             <td>City: </td>
-            <td>{client.city}</td>
+            <td>{clientInfo.city}</td>
           </tr>
           <tr>
             <td>Country: </td>
-            <td>{client.country}</td>
+            <td>{clientInfo.country}</td>
           </tr>
           <tr>
             <td>gstNumber: </td>
-            <td>{client.gstNumber}</td>
+            <td>{clientInfo.gstNumber}</td>
           </tr>
 
           <tr>
             <td>email: </td>
-            <td>{client.email}</td>
+            <td>{clientInfo.email}</td>
           </tr>
           <tr>
             <td>phone: </td>
-            <td>{client.phone}</td>
+            <td>{clientInfo.phone}</td>
           </tr>
 
           <tr>
             <td>isDeleted: </td>
-            <td>{client.deleted.toString()}</td>
+            <td>{clientInfo.deleted.toString()}</td>
           </tr>
         </tbody>
       </table>
       <div className="text-center">
-        <NavLink to="/ClientManagement/createService/addNewInvoices/">
-          <button
-            className="btn btn-primary generate-invoice-button"
-            onClick={() => {
-              // Handle generate invoice logic
-            }}
-            style={{ marginTop: "20px" }}
-          >
-            Generate Invoice
-          </button>
-        </NavLink>
+        <button
+          onClick={() =>
+            navigate("/ClientManagement/createService/addNewInvoices", {
+              state: {
+                clientId: client.id,
+                clientName: client.name,
+              },
+            })
+          }
+        >
+          Generate Invoice
+        </button>
 
         {/* <NavLink to="/http://localhost:8080/ClientManagement/readService/listAll">
           hello

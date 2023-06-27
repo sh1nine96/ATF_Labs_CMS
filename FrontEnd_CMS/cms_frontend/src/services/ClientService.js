@@ -11,8 +11,17 @@ class ClientService {
     return axios.get(`${API_BASE_URL}/readService/findById/?id=${id}`);
   }
 
-  createClient(client) {
-    return axios.post(`${API_BASE_URL}/createService/addNewClients`, client);
+  async createClient(client) {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/createService/addNewClients`,
+        client
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error creating client:", error);
+      throw error;
+    }
   }
 
   updateClient(id, client) {

@@ -11,12 +11,17 @@ class InvoiceService {
     return axios.get(`${API_BASE_URL}/readService/listAllInvoices`);
   }
 
-  getInvoiceById(id) {
-    return axios.get(`${API_BASE_URL}/readService/findInvoiceById/?id=${id}`);
-  }
-
-  createInvoice(id, invoice) {
-    return axios.post(`${API_BASE_URL}/createService/addNewInvoices/`, invoice);
+  async createInvoice(invoice) {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/createService/addNewInvoices/`,
+        invoice
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error creating invoice:", error);
+      throw error;
+    }
   }
 
   updateInvoice(id, invoice) {
