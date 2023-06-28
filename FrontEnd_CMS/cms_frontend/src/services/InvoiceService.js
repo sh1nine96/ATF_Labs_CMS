@@ -14,7 +14,7 @@ class InvoiceService {
   async createInvoice(invoice) {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/createService/addNewInvoices/`,
+        `${API_BASE_URL}/createService/addNewInvoices`,
         invoice
       );
       return response.data;

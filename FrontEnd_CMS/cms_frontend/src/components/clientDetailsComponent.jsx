@@ -8,34 +8,61 @@ const ClientDetailsComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const clientId = new URLSearchParams(location.search).get("id");
-  const [client, setClient] = useState({
-    pathname: "/ClientManagement/createService/addNewInvoices/",
-    state: { clientId: null },
-  });
+  const [client, setClient] = useState(
+    null
+    // pathname: "/ClientManagement/createService/addNewInvoices/",
+    // state: { clientId: null },
+  );
+
+  // useEffect(() => {
+  //   if (clientId && !client.state.clientId) {
+  //     ClientService.getClientById(clientId)
+  //       .then((response) => {
+  //         // console.log(response.data);
+  //         setClient({ ...client, state: { clientId: response.data } });
+  //         // console.log(client);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching client details:", error);
+  //       });
+  //   }
+  // }, [clientId, client]);
+
+  // console.log(client, clientId);
 
   useEffect(() => {
-    if (clientId && !client.state.clientId) {
+    if (clientId && !client) {
       ClientService.getClientById(clientId)
         .then((response) => {
-          console.log(response.data);
-          setClient({ ...client, state: { clientId: response.data } });
-          console.log(client);
+          setClient(response.data);
+          // console.log(response.data);
         })
         .catch((error) => {
-          console.error("Error fetching client details:", error);
+          console.log("Error fetching client details: ", error);
         });
     }
+    // console.log("Hello", client);
   }, [clientId, client]);
 
-  useEffect(() => {
-    console.log("Hello", client);
-  }, [client]);
+  console.log(clientId);
 
-  if (!client.state.clientId) {
+  if (!client) {
     return <div>Loading....</div>;
   }
 
-  const clientInfo = client.state.clientId;
+  const handleGenerateInvoice = () => {
+    navigate("/ClientManagement/createService/addNewInvoices", {
+      state: {
+        clientId: client.id,
+        clientName: client.name,
+      },
+    });
+    console.log(clientId, client);
+  };
+
+  // const clientInfo = client.state.clientId;
+  // console.log(clientInfo);
+  // console.log(clientId);
 
   return (
     <div className="client-details-container">
@@ -44,53 +71,54 @@ const ClientDetailsComponent = () => {
         <tbody>
           <tr>
             <td>Client Name:</td>
-            <td>{clientInfo.name}</td>
+            <td>{client.name}</td>
           </tr>
           <tr>
             <td>Main Contact Person:</td>
-            <td> {clientInfo.mainContactPerson}</td>
+            <td> {client.mainContactPerson}</td>
           </tr>
           <tr>
             <td>Address: </td>
-            <td> {clientInfo.address}</td>
+            <td> {client.address}</td>
           </tr>
           <tr>
             <td>City: </td>
-            <td>{clientInfo.city}</td>
+            <td>{client.city}</td>
           </tr>
           <tr>
             <td>Country: </td>
-            <td>{clientInfo.country}</td>
+            <td>{client.country}</td>
           </tr>
           <tr>
             <td>gstNumber: </td>
-            <td>{clientInfo.gstNumber}</td>
+            <td>{client.gstNumber}</td>
           </tr>
 
           <tr>
             <td>email: </td>
-            <td>{clientInfo.email}</td>
+            <td>{client.email}</td>
           </tr>
           <tr>
             <td>phone: </td>
-            <td>{clientInfo.phone}</td>
+            <td>{client.phone}</td>
           </tr>
 
           <tr>
             <td>isDeleted: </td>
-            <td>{clientInfo.deleted.toString()}</td>
+            <td>{client.deleted.toString()}</td>
           </tr>
         </tbody>
       </table>
       <div className="text-center">
         <button
-          onClick={() =>
-            navigate("/ClientManagement/createService/addNewInvoices", {
-              state: {
-                clientId: client.id,
-                clientName: client.name,
-              },
-            })
+          onClick={
+            handleGenerateInvoice
+            // navigate("/ClientManagement/createService/addNewInvoices", {
+            //   state: {
+            //     clientId: client.id,
+            //     clientName: client.name,
+            //   },
+            // })
           }
         >
           Generate Invoice
