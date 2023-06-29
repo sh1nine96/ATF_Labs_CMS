@@ -9,8 +9,9 @@ import java.util.List;
 public interface InvoiceCreateService {
 
 
-	String saveAllInvoices(List<Invoice> invoices);
+//	String saveAllInvoices(List <Invoice> invoices);
+	String saveInvoice(Invoice invoice);
 
-	
+
 
 }

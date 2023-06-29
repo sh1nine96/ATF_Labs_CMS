@@ -33,8 +33,8 @@ public class Invoice {
 		private boolean status;
 		@Column (name = "deleted", nullable = false, columnDefinition = "int default 0")
 		private boolean isDeleted;
-//(fetch = FetchType.LAZY)
-	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client clientId;
+       //(fetch = FetchType.LAZY)
+ 		@ManyToOne
+		@JoinColumn(name = "client_id")
+		private Client clientId;
 }

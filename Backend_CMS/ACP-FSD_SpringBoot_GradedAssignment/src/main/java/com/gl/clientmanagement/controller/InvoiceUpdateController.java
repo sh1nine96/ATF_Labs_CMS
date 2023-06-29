@@ -17,7 +17,7 @@ public class InvoiceUpdateController {
 
 
     @PutMapping("/updateExistingInvoiceRecord")
-    public String updateExistingInvoiceRecord(@PathVariable long id, @RequestBody Invoice invoice) {
+    public String updateExistingInvoiceRecord(@RequestParam long id, @RequestBody Invoice invoice) {
         return updateService.updateExistingInvoice(id, invoice);
     }
 }

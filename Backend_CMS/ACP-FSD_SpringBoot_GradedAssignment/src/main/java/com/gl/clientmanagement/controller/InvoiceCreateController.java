@@ -15,9 +15,12 @@ import java.util.List;
 public class InvoiceCreateController {
     @Autowired
     InvoiceCreateService invoiceCreateService;
-    @PostMapping("/addNewInvoices")
-    public String addNewInvoice(@RequestBody List<Invoice> invoices){
-        return  invoiceCreateService.saveAllInvoices(invoices);
+//    @PostMapping("/addNewInvoices")
+//    public String addNewInvoice(@RequestBody List<Invoice> invoices){
+//        return  invoiceCreateService.saveAllInvoices(invoices);
+        @PostMapping("/addNewInvoices")
+        public String addNewInvoice(@RequestBody Invoice invoice){
+        return  invoiceCreateService.saveInvoice(invoice);
 
     }
 }

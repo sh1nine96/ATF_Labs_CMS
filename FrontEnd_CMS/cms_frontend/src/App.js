@@ -8,6 +8,7 @@ import UpdateClientComponent from "./components/updateClientComponent";
 import AddClientComponent from "./components/addClientComponent";
 import WelcomePageController from "./components/welcomePageController";
 import InvoiceFormComponent from "./components/invoiceFormComponent";
+import ListInvoiceComponent from "./components/listInvoiceComponent";
 function App() {
   return (
     <Router>
@@ -38,6 +39,11 @@ function App() {
           exact
           path="/ClientManagement/createService/addNewInvoices/"
           element={<InvoiceFormComponent />}
+        />
+        <Route
+          exact
+          path="/ClientManagement/readService/listAllInvoices/"
+          element={<ListInvoiceComponent />}
         />
       </Routes>
     </Router>

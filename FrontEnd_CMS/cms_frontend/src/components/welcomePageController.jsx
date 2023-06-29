@@ -11,9 +11,14 @@ const WelcomePageController = () => {
           <h2>Clients</h2>
           <Link to="/ClientManagement/readService/listAll">Go to Clients</Link>
         </Link>
-        <Link className="box" to="/ClientManagement/readService/listAll">
+        <Link
+          className="box"
+          to="/ClientManagement/readService/listAllInvoices"
+        >
           <h2>Invoices</h2>
-          <Link to="/ClientManagement/readService/listAll">Go to Invoices</Link>
+          <Link to="/ClientManagement/readService/listAllInvoices">
+            Go to Invoices
+          </Link>
         </Link>
       </div>
     </div>
