@@ -7,8 +7,11 @@ import ClientDetailsComponent from "./components/clientDetailsComponent";
 import UpdateClientComponent from "./components/updateClientComponent";
 import AddClientComponent from "./components/addClientComponent";
 import WelcomePageController from "./components/welcomePageController";
-import InvoiceFormComponent from "./components/invoiceFormComponent";
+// import InvoiceFormComponent from "./components/invoiceFormComponent";
 import ListInvoiceComponent from "./components/listInvoiceComponent";
+import AddInvoiceComponent from "./components/addInvoiceComponent";
+
+let clientId;
 function App() {
   return (
     <Router>
@@ -35,15 +38,20 @@ function App() {
           path="/ClientManagement/createService/addNewClients"
           element={<AddClientComponent />}
         />
-        <Route
+        {/* <Route
           exact
           path="/ClientManagement/createService/addNewInvoices/"
           element={<InvoiceFormComponent />}
-        />
+        /> */}
         <Route
           exact
           path="/ClientManagement/readService/listAllInvoices/"
           element={<ListInvoiceComponent />}
+        />
+        <Route
+          exact
+          path="/ClientManagement/createService/addNewInvoices/"
+          element={<AddInvoiceComponent clientId={clientId} />}
         />
       </Routes>
     </Router>
