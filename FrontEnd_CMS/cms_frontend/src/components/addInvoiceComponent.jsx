@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InvoiceService from "../services/InvoiceService";
 import "../css/AddInvoiceComponent.css";
+import { useNavigate } from "react-router-dom";
 
 const AddInvoiceComponent = () => {
   const getCurrentDate = () => {
@@ -9,6 +10,7 @@ const AddInvoiceComponent = () => {
   };
 
   const [clientId, setClientId] = useState("");
+  const navigate = useNavigate();
 
   const [invoice, setInvoice] = useState({
     amount: "",
@@ -28,7 +30,7 @@ const AddInvoiceComponent = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name == "clientId") {
+    if (name === "clientId") {
       setInvoice((prevInvoice) => ({
         ...prevInvoice,
         clientId: {
@@ -58,6 +60,7 @@ const AddInvoiceComponent = () => {
     try {
       await InvoiceService.createInvoice(updatedInvoice);
       console.log("Invoice created succesfully");
+      navigate("/ClientManagement/readService/listAllInvoices");
       setInvoice({
         amount: "",
         date: getCurrentDate(),

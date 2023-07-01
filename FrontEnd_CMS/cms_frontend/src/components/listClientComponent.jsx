@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import ClientService from "../services/ClientService";
 import { NavLink, useNavigate } from "react-router-dom";
+import "../css/listClientComponent.css";
 
 const ListClientComponent = () => {
   const [clients, setClients] = useState([]);
@@ -71,9 +72,17 @@ const ListClientComponent = () => {
   return (
     <div>
       <h2 className="text-center">Clients List</h2>
-      <NavLink to="/ClientManagement/createService/addNewClients">
-        <button>Add new Client</button>
-      </NavLink>
+      <div className="nav-button">
+        <NavLink to="/ClientManagement/createService/addNewClients">
+          <button>Add new Client</button>
+        </NavLink>
+        <NavLink
+          className="text-right"
+          to="/ClientManagement/readService/listAllInvoices"
+        >
+          <button>View Invoices</button>
+        </NavLink>
+      </div>
       <div className="table-container">
         <table className="table table-stripped table bordered">
           <thead>

@@ -50,16 +50,6 @@ const ClientDetailsComponent = () => {
     return <div>Loading....</div>;
   }
 
-  const handleGenerateInvoice = () => {
-    navigate("/ClientManagement/createService/addNewInvoices", {
-      state: {
-        clientId: client.id,
-        clientName: client.name,
-      },
-    });
-    console.log(clientId, client);
-  };
-
   // const clientInfo = client.state.clientId;
   // console.log(clientInfo);
   // console.log(clientId);
@@ -109,25 +99,6 @@ const ClientDetailsComponent = () => {
           </tr>
         </tbody>
       </table>
-      <div className="text-center">
-        <button
-          onClick={
-            handleGenerateInvoice
-            // navigate("/ClientManagement/createService/addNewInvoices", {
-            //   state: {
-            //     clientId: client.id,
-            //     clientName: client.name,
-            //   },
-            // })
-          }
-        >
-          Generate Invoice
-        </button>
-
-        {/* <NavLink to="/http://localhost:8080/ClientManagement/readService/listAll">
-          hello
-        </NavLink> */}
-      </div>
     </div>
   );
 };
